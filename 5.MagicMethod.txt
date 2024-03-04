@@ -1,0 +1,9 @@
+1. + operator overloading
+- use "add" magic to overload the summation:
+    def __add__(self, other): 
+        return Vector(self.x + other.x, self.y + other.y)
+    
+2. object function 
+- use "call" magic to make the instance of the class callable: 
+    def __call__(self): 
+        print("I was called")

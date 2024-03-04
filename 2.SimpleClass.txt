@@ -1,0 +1,92 @@
+1. A method in a class 
+- A class member function always has itself object as the first value in parameter. 
+- It means the first parameter of every class member function should be itself instance. Use "self" keyword.
+- Example: 
+    // SimpleClass.py - 1
+    class Item: 
+        def display(self): // without "self" keyword it will be error
+            print(self)
+            print(self.name)
+            print(self.quantity)
+            print(self.price)
+
+        def calculate(self, x, y): 
+            return x * y
+
+    item1 = Item()
+    item1.name = "Phone"
+    item1.quantity = 2
+    item1.price = 1200
+    item1.display()
+    print(item1.calculate(item1.quantity, item1.price))
+
+2. Magic method
+- In CPP language, we have constructor. In Python, we have __init__. Example: 
+    // SimpleClass.py - 4
+    class Item:
+        def __init__(self, name: str, price: float, quantity = 0):
+            print("The object is initialized!")
+            # run validations to received arguments
+            assert price >= 0, f"Price {price} is not greater or equal to than zero!"
+            assert quantity >= 0, f"Quantity {quantity} is not greater or equal to than zero!"
+                    
+            # assign to self object
+            self.name = name
+            self.price = price
+            self.quantity = quantity
+
+- In the above code, "assert" is used to validate the value of parameter passed to the __init__.
+
+3. Access class attribute 
+- We can access class attribute by using the Class. Example: 
+    // SimpleClass.py
+    class Item:
+        pay_rate = 0.8
+    
+    print(Item.paye_rate) // 0.8 
+- NOTE: we can also access class attribute as that class' instance.
+
+4. view all attributes of a class or a instance 
+- "__dict__" is used to view all the class or instance attribute: 
+- Example:   
+    // SimpleClass.py
+    # print(Item.__dict__) # all attribute for class level
+    # print(item2.__dict__) # all attribute for instance level
+
+5. Overwrite the class or instance attribute
+- In python, modifier function to Overwrite the attribute of a class or an instance is not neccessary. 
+- Example: 
+    // SimpleClass.py
+    class Item:
+        pay_rate = 0.8
+    
+    item2 = Item("Laptop", 2000, 3)
+    print(Item.pay_rate) // 0.8, this is the class attribute
+
+    item3 = Item("Watch", 200, 15)
+    item3.pay_rate = 0.5
+    print(item3.pay_rate) // 0.5, this is the instance attribute
+
+6. define the represent of an object
+- the __repr__ method is a special method used to define how an object is represented.
+- Example: 
+    // SimpleClass.py
+    class Item:
+        def __repr__(self): 
+            return f"Item('{self.name}', {self.quantity}, {self.price})"
+
+    item1 = Item("Phone", 100, 1)
+    print(item1) // Without __repr__, <__main__.Item object at 0x0000015C9006BFD0>
+
+    print(item1) // Item('Phone', 1, 100)
+
+7. Read csv file 
+- Read like a normal file, then "DictReader()" to convert data .Example: 
+    @classmethod
+    def instantiate_from_csv(cls): 
+        with open('items.csv', 'r') as f:
+            reader = csv.DictReader(f)
+            items = list(reader)
+            
+        for item in items: 
+            print(item) 

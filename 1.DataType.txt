@@ -1,0 +1,14 @@
+1. Type
+- to know a type in python, use type():
+    // main.py
+    item1 = "iphone"
+    item2 = 50
+
+    print(type(item1)) // str
+    print(type(item2)) // int
+
+    // output 
+    <class 'str'>
+    <class 'int'>
+
+- Each type is an object, therefore item2 is an instance of integer class. 

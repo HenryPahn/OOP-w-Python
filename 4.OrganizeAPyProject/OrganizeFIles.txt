@@ -1,0 +1,58 @@
+1. Import a class/ value from another file 
+- To import a class from another file: 
+    // item.py
+    class Item(): 
+        pass
+
+    // phone.py 
+    from item import Item 
+
+    class Phone(Item): 
+        pass
+
+2. classmethod and staticmethod decorator
+- @classmethod: https://www.programiz.com/python-programming/methods/built-in/classmethod#google_vignette
+- @staticmethod: https://www.programiz.com/python-programming/methods/built-in/staticmethod
+
+
+3. property decorator / query function
+- In cpp, we have query function that it cannot access and modify the class attribute directly. 
+- In python, we can create a query function by using the "property" decorator: 
+    // item.py 
+    @property
+    def name(self): 
+        return self.name
+
+4. private attributes and methods
+- To set an attribute or method private, we use double underscore: 
+- example:  
+    // item.py
+    def __init__(self, name: str, price: float, quantity = 0):=
+        self.__name = name // set name attribute private
+
+    @property
+    def name(self): 
+        return self.__name 
+
+    def __printName(self): // set printName() function private
+        print("fasdfasdf")
+
+    item1 = Item("MyItem", 750)
+
+    item1.name = "Henry" // this line got an error
+
+    print(item1.name) // MyItem
+
+5. modifier function in class 
+- We use "setter" decorator to modify a private class attribute.  
+- syntax: @<attributeName>.setter
+- Example: 
+    // item.py 
+    @name.setter 
+    def name(self, value): 
+        if(len(value) > 10):
+            raise Exception("Name is too long")
+        else:
+            self.__name = value 
+
+6. Priv
