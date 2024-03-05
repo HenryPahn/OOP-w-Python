@@ -1,0 +1,66 @@
+1. steps to create a decorator function 
+- there are 5 steps to create decorator: 
+    + step 1: define the decorator function 
+    + step 2: define the wrapper function 
+    + step 3: do something before target_function is called 
+    + step 4: do something after the call to target function
+    + step 5: return wrapper fucntion 
+- Example 
+    #Step 1: Define the decorator function
+    def decorator_name(target_function):
+        #Step 2: Define the wrapper function
+        def wrapper(*args, **kwargs):
+
+            #Step 3: Do something before target_function is called
+            results = target_function( * args, ** kwargs)
+
+            # Step 4: Do something after the call to target_function
+            return results
+        return wrapper # Step 5: return wrapper function 
+
+2. Apply decorator: 
+- There are 2 ways to use decorator: 
+- Create decorator function:
+    // decorator.py
+    def mydecorator(function):
+        def wrapper(): 
+            function()
+        return wrapper
+
+- The first way:
+    def basic_decorator(): 
+        print("Hello world")
+
+    mydecorator(basic_decorator)()
+- This is not a common usage of decorator
+
+- The second way: 
+    @mydecorator
+    def common_decorator(): 
+        print("Hello my world")
+
+    common_decorator()
+- This is more elegant, and usefull.
+
+3. The parameter of decorator
+- If the parameter of the function is not the same, there will be an error. 
+- Use "*args, **kwargs" for the parameter of wrapper function and passed function
+
+4. Use decorator to count time 
+- we can use decorator to count the execution time of a function.
+- This is an example for timer decorator: 
+    def timed(function): 
+        def wrapper(*args, **kwargs): 
+            before = time.time()
+            function(*args, ** kwargs)
+            after = time.time()
+            print(f"{function.__name__} tool {after - before} seconds to execute!")
+        return wrapper
+
+    @timed
+    def myfunction(x): 
+        result = 1 
+        for i in range(1, x): 
+            result += i
+        
+    myfunction(1000000)
